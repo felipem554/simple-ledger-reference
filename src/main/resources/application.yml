@@ -1,0 +1,14 @@
+spring:
+  datasource:
+    url: jdbc:sqlite:ledger.db
+    driver-class-name: org.sqlite.JDBC
+  sql:
+    init:
+      mode: always
+
+server:
+  port: 5000
+  tomcat:
+    threads:
+      max: 200
+      min-spare: 10
