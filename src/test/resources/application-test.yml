@@ -4,4 +4,8 @@ spring:
     driver-class-name: org.sqlite.JDBC
   sql:
     init:
-      mode: always
+      mode: never
+
+  liquibase:
+    enabled: true
+    change-log: classpath:/db/changelog/db.changelog-master.yaml
