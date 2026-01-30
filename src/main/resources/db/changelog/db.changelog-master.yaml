@@ -1,0 +1,11 @@
+databaseChangeLog:
+  - changeSet:
+      id: 001-init-ledger
+      author: felipe
+      changes:
+        - sqlFile:
+            path: db/changelog/sql/001_init.sql
+            relativeToChangelogFile: false
+            splitStatements: true
+            stripComments: true
+            endDelimiter: ;
