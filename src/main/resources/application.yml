@@ -4,7 +4,10 @@ spring:
     driver-class-name: org.sqlite.JDBC
   sql:
     init:
-      mode: always
+      mode: never
+  liquidbase:
+    enabled: true
+    change-log: classpath:/db/changelog/db.changelog-master.yaml
 
 server:
   port: 5000
