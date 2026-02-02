@@ -25,6 +25,7 @@ class LedgerControllerTest {
 
     @Test
     void createsAccountAndTransaction() {
+
         AccountRequest accountA = new AccountRequest();
         accountA.setName("cash");
         accountA.setDirection("debit");
@@ -66,6 +67,7 @@ class LedgerControllerTest {
 
     @Test
     void enforcesIdempotencyKey() {
+
         AccountRequest accountA = new AccountRequest();
         accountA.setName("cash");
         accountA.setDirection("debit");
