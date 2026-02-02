@@ -51,6 +51,11 @@ public class AccountRepository {
         return jdbcTemplate.query(sql, MAPPER, ids.toArray());
     }
 
+    public List<AccountRow> findAll() {
+        String sql = "SELECT id, name, direction, balance FROM accounts ORDER BY name ASC";
+        return jdbcTemplate.query(sql, MAPPER);
+    }
+
     public void updateBalance(String id, long balance) {
         jdbcTemplate.update("UPDATE accounts SET balance = ? WHERE id = ?", balance, id);
     }

@@ -8,11 +8,13 @@ import com.example.ledger.repository.AccountRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
 @Service
 public class AccountService {
+
     private final AccountRepository accountRepository;
 
     public AccountService(AccountRepository accountRepository) {
@@ -23,6 +25,7 @@ public class AccountService {
         String id = request.getId() == null ? UUID.randomUUID().toString() : request.getId();
         Direction direction = Direction.from(request.getDirection());
         long balance = request.getBalance() == null ? 0L : request.getBalance();
+
         if (balance < 0) {
             throw new IllegalArgumentException("balance must be non-negative");
         }
@@ -33,10 +36,10 @@ public class AccountService {
         }
 
         AccountRepository.AccountRow row = new AccountRepository.AccountRow(
-            id,
-            request.getName(),
-            direction,
-            balance
+                id,
+                request.getName(),
+                direction,
+                balance
         );
         accountRepository.insert(row);
 
@@ -45,8 +48,21 @@ public class AccountService {
 
     public AccountResponse getById(String id) {
         AccountRepository.AccountRow row = accountRepository.findById(id)
-            .orElseThrow(() -> new ApiException(HttpStatus.NOT_FOUND, "account_not_found", "account not found"));
+                .orElseThrow(() ->
+                        new ApiException(HttpStatus.NOT_FOUND, "account_not_found", "account not found")
+                );
 
         return new AccountResponse(row.id(), row.name(), row.direction().value(), row.balance());
+    }
+
+    public List<AccountResponse> getAll() {
+        return accountRepository.findAll().stream()
+                .map(row -> new AccountResponse(
+                        row.id(),
+                        row.name(),
+                        row.direction().value(),
+                        row.balance()
+                ))
+                .toList();
     }
 }
