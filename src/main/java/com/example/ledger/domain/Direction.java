@@ -1,6 +1,7 @@
 package com.example.ledger.domain;
 
 public enum Direction {
+
     DEBIT("debit"),
     CREDIT("credit");
 

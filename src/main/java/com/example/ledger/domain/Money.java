@@ -1,6 +1,7 @@
 package com.example.ledger.domain;
 
 public final class Money {
+
     private final long amount;
 
     public Money(long amount) {
